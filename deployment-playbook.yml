@@ -55,7 +55,7 @@
     wait_for:
       host: "{{ cloud.auth.auth_url | urlsplit('hostname') }}"
       port: "{{ cloud.auth.auth_url | urlsplit('port') }}"
-      timeout: 1
+      timeout: 5
       msg: "Unable to connect to Cloud API"
 
   - name: Create Project
