@@ -11,22 +11,12 @@
     vnf:         "unknown"
     repo_prefix: "https://raw.githubusercontent.com/BernardTsai/applications/master"
 
-  # ----- ENVIRONMENT ----------------------------------------------------------
-  environment:
-    http_proxy:  "{{http_proxy}}"
-    https_proxy: "{{https_proxy}}"
-    no_proxy:    "{{no_proxy}}"
-
 # ----- TASKS ----------------------------------------------------------------
 
   tasks:
   - name: Create Task UUID
     set_fact:
       uuid: "{{ 1000000000 | random | to_uuid }}"
-
-  - name: Load Clouds Configuration
-    include_vars:
-      file: ./configurations/clouds.yml
 
   - name: Load VNF Descriptor
     uri:
