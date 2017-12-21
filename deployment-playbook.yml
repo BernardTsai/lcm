@@ -10,9 +10,6 @@
   vars:
     vnf:         "unknown"
     repo_prefix: "https://raw.githubusercontent.com/BernardTsai/applications/master"
-    http_proxy:  ""
-    https_proxy: ""
-    no_proxy:    ""
 
   # ----- ENVIRONMENT ----------------------------------------------------------
   environment:
