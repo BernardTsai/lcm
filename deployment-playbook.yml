@@ -4,7 +4,7 @@
   gather_facts: no
   become:       no
   connection:   local
-
+  
   # ----- VARS -----------------------------------------------------------------
 
   vars:
@@ -14,7 +14,13 @@
     https_proxy: ""
     no_proxy:    ""
 
-  # ----- TASKS ----------------------------------------------------------------
+  # ----- ENVIRONMENT ----------------------------------------------------------
+  environment:
+    http_proxy:  "{{http_proxy}}"
+    https_proxy: "{{https_proxy}}"
+    no_proxy:    "{{no_proxy}}"
+
+# ----- TASKS ----------------------------------------------------------------
 
   tasks:
   - name: Create Task UUID
@@ -60,10 +66,6 @@
       port: "{{ cloud.auth.auth_url | urlsplit('port') }}"
       timeout: 5
       msg: "Unable to connect to Cloud API"
-    envorionment:
-      http_proxy:  "{{http_proxy}}"
-      https_proxy: "{{https_proxy}}"
-      no_proxy:    "{{no_proxy}}"
     
   - name: Create Project
     os_project:
