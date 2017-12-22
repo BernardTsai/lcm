@@ -199,6 +199,7 @@ def main():
     global nodes
 
     # get environment variables
+    print( os.environ )
     cloud_name   = os.environ['OS_CLOUD']
     project_name = os.environ['OS_PROJECT_NAME']
 
