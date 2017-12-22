@@ -54,6 +54,10 @@
       timeout: 1
       msg: "Unable to connect to Cloud API"
 
+  - name: Install Shade
+    pip:
+      name: shade
+  
   - name: Obtain Inventory Data (may take some time)
     script: ./scripts/inventory.py
     environment:
