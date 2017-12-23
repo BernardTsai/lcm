@@ -1,7 +1,7 @@
 ---
 - name:         VNF Inventory
   hosts:        localhost
-  gather_facts: no
+  gather_facts: yes
   become:       no
   connection:   local
 
@@ -70,7 +70,7 @@
 
   - name: Get Timestamp
     set_fact:
-      timestamp: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
+      timestamp: "{{ ansible_date_time.iso8601_micro }}"
 
   - name: Upload Inventory
     uri:
