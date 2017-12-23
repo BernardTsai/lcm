@@ -9,6 +9,10 @@ import os_client_config
 # ------------------------------------------------------------------------------
 
 # data
+cloud_name      = None
+project_name    = None
+password        = None
+
 tenant          = None
 security_groups = None
 networks        = None
@@ -21,11 +25,14 @@ servers         = None
 
 class Tenant():
     def __init__(self, data):
+        global password
+        global cloud_name
+        
         self.id          = data["id"]
         self.name        = data["name"]
         self.description = data["description"]
-        self.password    = os.environ['OS_PASSWORD']
-        self.cloud       = os.environ['OS_CLOUD']
+        self.password    = password
+        self.cloud       = cloud_name
 
 # ------------------------------------------------------------------------------
 
@@ -197,9 +204,12 @@ class Volumes():
 
 def main():
     global nodes
+    global password
+    global cloud_name
+    global project_name
 
     # get environment variables
-    print( os.environ['OS_CLOUD'] )
+    password     = os.environ['PASSWORD']
     cloud_name   = os.environ['OS_CLOUD']
     project_name = os.environ['OS_PROJECT_NAME']
 
