@@ -68,6 +68,18 @@
     register: data
     changed_when: false
 
+  - name: Get Timestamp
+    set_fact:
+      timestamp: "{{ansible_date_time.iso8601_micro}}"
+
+  - name: Upload Inventory
+    uri:
+      url:    "https://github.com/BernardTsai/applications/{{vnf}}/inventory/{{timestamp}}.yaml"
+      method: "PUT"
+      headers:
+        Authorization: "token {{token}}"
+      body: "{'path':'https://github.com/BernardTsai/applications/{{vnf}}/inventory/{{timestamp}}.yaml', 'message':'{{timestamp}} - Inventory of VNF {{vnf}}', 'content':'{{data.stdout}}'}"
+
   - name: Store Inventory
     copy:
       content: "{{ data.stdout }}"
