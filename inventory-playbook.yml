@@ -74,17 +74,10 @@
 
   - name: Upload Inventory
     uri:
-      url:    "https://github.com/BernardTsai/applications/{{vnf}}/inventory/{{timestamp}}.yaml"
+      url:    "https://api.github.com/repos/BernardTsai/applications/contents/{{vnf}}/inventory/{{timestamp}}.yaml"
       method: "PUT"
+      body_format: "json"
+      validate_certs: no
       headers:
         Authorization: "token {{token}}"
-      body: "{'path':'https://api.github.com/repos/BernardTsai/applications/contents/{{vnf}}/inventory/{{timestamp}}.yaml', 'message':'{{timestamp}} - Inventory of VNF {{vnf}}', 'content':'{{data.stdout}}'}"
-
-  - name: Store Inventory
-    copy:
-      content: "{{ data.stdout }}"
-      dest:    "/tmp/{{uuid}}.data.yml"
-
-  - name: Location of Inventory
-    debug:
-      msg: "/tmp/{{uuid}}.data.yml"
+      body: "{'message':'{{timestamp}} - Inventory of VNF {{vnf}}', 'content':'{{ data.stdout | b64encode }}'}"
