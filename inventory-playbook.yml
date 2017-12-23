@@ -70,7 +70,7 @@
 
   - name: Get Timestamp
     set_fact:
-      timestamp: "{{ansible_date_time.iso8601_micro}}"
+      timestamp: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M-%S') }}"
 
   - name: Upload Inventory
     uri:
