@@ -209,7 +209,7 @@ def main():
     global project_name
 
     # get environment variables
-    password     = os.environ['PASSWORD']
+    password     = os.environ['OS_PASSWORD']
     cloud_name   = os.environ['OS_CLOUD']
     project_name = os.environ['OS_PROJECT_NAME']
 
