@@ -78,6 +78,7 @@
       method: "PUT"
       body_format: "json"
       validate_certs: no
+      status_code: "200, 201" 
       headers:
         Authorization: "token {{token}}"
       body: "{'message':'{{timestamp}} - Inventory of VNF {{vnf}}', 'content':'{{ data.stdout | b64encode }}'}"
