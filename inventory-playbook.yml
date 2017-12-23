@@ -78,7 +78,7 @@
       method: "PUT"
       headers:
         Authorization: "token {{token}}"
-      body: "{'path':'https://github.com/repos/BernardTsai/applications/contents/{{vnf}}/inventory/{{timestamp}}.yaml', 'message':'{{timestamp}} - Inventory of VNF {{vnf}}', 'content':'{{data.stdout}}'}"
+      body: "{'path':'https://api.github.com/repos/BernardTsai/applications/contents/{{vnf}}/inventory/{{timestamp}}.yaml', 'message':'{{timestamp}} - Inventory of VNF {{vnf}}', 'content':'{{data.stdout}}'}"
 
   - name: Store Inventory
     copy:
