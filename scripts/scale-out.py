@@ -49,7 +49,7 @@ def main():
     while str(index) in nodes.keys():
         index = index + 1
 
-    print( "index": index )
+    print("index:" + str(index))
 
 # ------------------------------------------------------------------------------
 
