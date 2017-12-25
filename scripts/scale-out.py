@@ -24,7 +24,7 @@ def main():
         sys.exit(1)
 
     # Get servers
-    data = cloud.list_servers(detailed=True)
+    data = cloud.list_servers(detailed=False)
 
     # dictionary of all found servers
     nodes = {}
