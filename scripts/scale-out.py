@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 
 import shade
-import yaml
 import sys
 import os
 import os_client_config
@@ -9,10 +8,9 @@ import os_client_config
 # ------------------------------------------------------------------------------
 
 def main():
-    global nodes
-
     # get environment variables
     cloud_name   = os.environ['OS_CLOUD']
+    vnf_name     = os.environ['OS_VNF_NAME']
     project_name = os.environ['OS_PROJECT_NAME']
     cluster_name = os.environ['OS_CLUSTER_NAME']
 
@@ -32,7 +30,7 @@ def main():
     nodes = {}
 
     # filter servers
-    cluster_prefix = project_name + "_" + cluster_name
+    cluster_prefix = vnf_name + "_" + project_name + "_" + cluster_name
     for entity in data:
         name = entity["name"]
         if name.startswith(cluster_prefix):
