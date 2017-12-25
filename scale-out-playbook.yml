@@ -59,8 +59,8 @@
     script: ./scripts/scale-out.py
     environment:
       OS_CLIENT_CONFIG_FILE: "/tmp/{{uuid}}.yml"
-      OS_CLOUD:              "{{vnfd.vnf.name}}_{{vnfd.tenant.cloud}}"
-      OS_PROJECT_NAME:       "{{vnfd.vnf.name}}_{{vnfd.tenant.cloud}}"
+      OS_CLOUD:              "{{vnfd.tenant.cloud}}"
+      OS_PROJECT_NAME:       "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}"
       OS_CLUSTER_NAME:       "{{vnfd.cluster.name}}"
     register: data
     changed_when: false
