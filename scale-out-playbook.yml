@@ -111,10 +111,6 @@
     set_fact:
       ports: "{{portnames|json_query('results[*].ansible_facts.data')}}"
 
-  - name: Show Ports
-    debug:
-      var: ports
- 
   - name: Create Node
     os_server:
       cloud:             "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}"
