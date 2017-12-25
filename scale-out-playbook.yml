@@ -40,7 +40,7 @@
 
   - name: Load Cloud Credentials
     set_fact:
-      cloud: "{{ clouds.get( vnfd.vnf.name + '_' + vnfd.tenant.cloud ) }}"
+      cloud: "{{ clouds.get( vnfd.tenant.cloud ) }}"
 
   - name: Create Customer clouds.yml Configuration
     template:
