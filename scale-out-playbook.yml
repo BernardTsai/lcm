@@ -60,7 +60,8 @@
     environment:
       OS_CLIENT_CONFIG_FILE: "/tmp/{{uuid}}.yml"
       OS_CLOUD:              "{{vnfd.tenant.cloud}}"
-      OS_PROJECT_NAME:       "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}"
+      OS_VNF_NAME:           "{{vnfd.vnf.name}}"
+      OS_PROJECT_NAME:       "{{vnfd.tenant.name}}"
       OS_CLUSTER_NAME:       "{{vnfd.cluster.name}}"
     register: data
     changed_when: false
