@@ -81,7 +81,7 @@
     os_port:
       cloud:   "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}"
       state:   present
-      name:    "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.index}}_{{item.network}}"
+      name:    "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.node}}_{{item.network}}"
       network: "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{item.network}}"
       security_groups:
       - "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{item.network}}"
@@ -115,7 +115,7 @@
       image:             "{{item.image}}"
       key_name:          "{{vnfd.vnf.name}}_{{vnfd.tenant.cloud}}_keypair"
       nics:
-      - port_name:       "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.index}}_{{item.ports[0].network}}"
+      - port_name:       "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.node}}_{{item.ports[0].network}}"
       auto_ip:           no
       security_groups:
       - default
@@ -145,7 +145,7 @@
       state:        present
       volume_type:  "{{item.type}}"
       size:         "{{item.size}}"
-      display_name: "{{vnfd.vnf.name}}_{{vnfd.tenant.name }}_{{ cluster.name }}_{{ cluster.index}}_{{item.name}}"
+      display_name: "{{vnfd.vnf.name}}_{{vnfd.tenant.name }}_{{ cluster.name }}_{{placement.node}}_{{item.name}}"
     environment:
       OS_CLIENT_CONFIG_FILE: "/tmp/{{uuid}}.yml"
     with_items:
@@ -168,8 +168,8 @@
     os_server_volume:
       cloud:  "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}"
       state:  present
-      server: "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.index}}"
-      volume: "{{item.name}}"
+      server: "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.node}}"
+      volume: "{{vnfd.vnf.name}}_{{vnfd.tenant.name }}_{{ cluster.name }}_{{placement.node}}_{{item.name}}"
       device: "{{item.device}}"
     environment:
       OS_CLIENT_CONFIG_FILE: "/tmp/{{uuid}}.yml"
