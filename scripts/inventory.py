@@ -224,7 +224,7 @@ def main():
         sys.exit(1)
 
     # Get project
-    data   = cloud.get_project(project_name)
+    data   = cloud.get_project(vnf_name + "_" + project_name)
 
     tenant = Tenant(data)
 
