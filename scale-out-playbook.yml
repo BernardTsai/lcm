@@ -9,6 +9,7 @@
 
   vars:
     vnf:         "unknown"
+    cluster:     "unknown"
     repo_prefix: "https://raw.githubusercontent.com/BernardTsai/applications/master"
 
   # ----- TASKS ----------------------------------------------------------------
