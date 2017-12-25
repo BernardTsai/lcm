@@ -100,14 +100,9 @@
 
   # ----- Nodes ----------------------------------------------------------------
 
-  - name: Debug Ports
-    debug:
-      msg: "{{item}}"
-    with_items: "{{vnfd.cluster.ports}}"
-
   - name: Define Port Names
     set_fact:
-      port_name: "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{item.network}}"
+      port-name: "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{ cluster.name }}_{{placement.node}}_{{item.network}}"
     with_items: "{{vnfd.cluster.ports}}"
     register: portnames
 
