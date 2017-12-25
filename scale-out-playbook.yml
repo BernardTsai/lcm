@@ -102,7 +102,7 @@
 
   - name: Define Ports
     set_fact:
-      ports: "{{vnfd.cluster|json_query('ports[*].{port_name: network}')}}"
+      ports: "{{vnfd.cluster|json_query('ports[*].{port_name: vnfd.vnf.name + "_" + vnfd.tenant.name + "_" + network}')}}"
 
   - name: Show Ports
     debug:
