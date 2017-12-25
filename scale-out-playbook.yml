@@ -102,13 +102,14 @@
 
   - name: Define Port Names
     set_fact:
-      port-name: "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.node}}_{{item.network}}"
+      data:
+        port-name: "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.node}}_{{item.network}}"
     with_items: "{{vnfd.cluster.ports}}"
     register: portnames
 
   - name: Define Ports
     set_fact:
-      ports: "{{portnames|json_query('results[*].ansible_facts')}}"
+      ports: "{{portnames|json_query('results[*].ansible_facts.data')}}"
 
   - name: Show Ports
     debug:
