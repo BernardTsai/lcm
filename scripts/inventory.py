@@ -211,6 +211,7 @@ def main():
     # get environment variables
     password     = os.environ['OS_PASSWORD']
     cloud_name   = os.environ['OS_CLOUD']
+    vnf_name     = os.environ['OS_VNF_NAME']
     project_name = os.environ['OS_PROJECT_NAME']
 
     # Context: central administration
@@ -229,7 +230,7 @@ def main():
 
     # Context: tenant administration
     try:
-        cloud_config = os_client_config.OpenStackConfig().get_one_cloud( project_name )
+        cloud_config = os_client_config.OpenStackConfig().get_one_cloud( vnf_name + "_" + project_name )
 
         cloud = shade.OpenStackCloud(cloud_config=cloud_config)
     except Exception as exc:
