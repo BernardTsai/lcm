@@ -119,11 +119,11 @@
     os_server:
       cloud:             "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}"
       state:             present
-      name:              "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}"
+      name:              "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.node}}"
       availability_zone: "{{item.zone}}"
       flavor:            "{{item.flavor}}"
       image:             "{{item.image}}"
-      key_name:          "{{vnfd.vnf.name}}_{{vnfd.tenant.cloud}}_keypair"
+      key_name:          "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_keypair"
       nics:              "{{ports}}"
       auto_ip:           no
       security_groups:
@@ -154,7 +154,7 @@
       state:        present
       volume_type:  "{{item.type}}"
       size:         "{{item.size}}"
-      display_name: "{{vnfd.vnf.name}}_{{vnfd.tenant.name }}_{{ cluster.name }}_{{placement.node}}_{{item.name}}"
+      display_name: "{{vnfd.vnf.name}}_{{vnfd.tenant.name }}_{{vnfd.cluster.name}}_{{placement.node}}_{{item.name}}"
     environment:
       OS_CLIENT_CONFIG_FILE: "/tmp/{{uuid}}.yml"
     with_items:
