@@ -100,11 +100,15 @@
 
   # ----- Nodes ----------------------------------------------------------------
 
+  - name: Define Port Names
+    set_fact:
+      port_name: "{{vnfd.vnf.name}}_{{vnfd.vnf.name}}_{{item.network}}"
+    with_items: vnfd.cluster.ports
+    register: portnames
+
   - name: Define Ports
     set_fact:
-      ports: "{{vnfd.cluster|json_query(query)}}"
-    vars:
-      query: "ports[*].{port_name: vnfd.vnf.name + '_' + vnfd.tenant.name + '_' + network}"
+      ports: "{{portnames|json_query('results[*].ansible_facts')}}"
 
   - name: Show Ports
     debug:
