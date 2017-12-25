@@ -178,12 +178,12 @@
       cloud:  "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}"
       state:  present
       server: "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.node}}"
-      volume: "{{vnfd.vnf.name}}_{{vnfd.tenant.name }}_{{ cluster.name }}_{{placement.node}}_{{item.name}}"
+      volume: "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.node}}_{{item.name}}"
       device: "{{item.device}}"
     environment:
       OS_CLIENT_CONFIG_FILE: "/tmp/{{uuid}}.yml"
     with_items:
-    - "{{vnfd.volumes}}"
+    - "{{vnfd.cluster.volumes}}"
     async:    3600
     poll:     0
     register: attachment_results
