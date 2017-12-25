@@ -48,6 +48,11 @@
       dest: "/tmp/{{uuid}}.yml"
     changed_when: false
 
+  - name: Display Configuration
+    debug: var=item
+    with_file:
+    - "/tmp/{{uuid}}.yml"
+
   - name: Check Connectivity
     wait_for:
       host: "{{ cloud.auth.auth_url | urlsplit('hostname') }}"
