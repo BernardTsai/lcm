@@ -48,11 +48,6 @@
       dest: "/tmp/{{uuid}}.yml"
     changed_when: false
 
-  - name: Display Configuration
-    debug: var=item
-    with_file:
-    - "/tmp/{{uuid}}.yml"
-
   - name: Check Connectivity
     wait_for:
       host: "{{ cloud.auth.auth_url | urlsplit('hostname') }}"
@@ -105,6 +100,14 @@
 
   # ----- Nodes ----------------------------------------------------------------
 
+  - name: Define Ports
+    set_fact:
+      ports: "{{vnfd.cluster|json_query('ports[*].{port_name: network}')}}"
+
+  - name: Show Ports
+    debug:
+      var: ports
+ 
   - name: Create Node
     os_server:
       cloud:             "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}"
@@ -114,8 +117,7 @@
       flavor:            "{{item.flavor}}"
       image:             "{{item.image}}"
       key_name:          "{{vnfd.vnf.name}}_{{vnfd.tenant.cloud}}_keypair"
-      nics:
-      - port_name:       "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_{{vnfd.cluster.name}}_{{placement.node}}_{{item.ports[0].network}}"
+      nics:              "{{ports}}"
       auto_ip:           no
       security_groups:
       - default
