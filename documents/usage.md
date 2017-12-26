@@ -19,27 +19,51 @@ Prerequisites:
 * git
 * clone this repoitory
 * access to an OpenStack API endpoint (configurations are kept in clouds.yaml in the configurations sub-directory)
+* a cloud configuration file 'cloud.yml'
 * a VNF descriptor stored at:
 
   https://raw.githubusercontent.com/BernardTsai/applications/master/{{vnf}}/descriptor.yml"
+* a VNF cluster descriptor stored at:
+
+  https://raw.githubusercontent.com/BernardTsai/applications/master/{{vnf}}/{{cluster}}descriptor.yml"
+
 
 Inventory:
 ----------
 
 Determine the current setup of a tenant:
 
-    ansible-playbook inventory-playbook.yml  --vault-id passphrase.txt --extra-vars "vnf=Clearwater"
+    ansible-playbook inventory-playbook.yml --extra-vars "@cloud.yml" --extra-vars "vnf=Clearwater"
+
+The output will be pushed to the repository:
+
+  https://raw.githubusercontent.com/BernardTsai/applications/master/inventory/{{timestamp}}.yml"
+
 
 Deployment:
-----------
+-----------
 
 Create/update a new tenant:
 
-    ansible-playbook deployment-playbook.yml  --vault-id passphrase.txt --extra-vars "vnf=Clearwater"
+    ansible-playbook deployment-playbook.yml --extra-vars "@cloud.yml" --extra-vars "vnf=Clearwater"
+
+Scale-Out:
+----------
+
+Scale-out a cluster of a VNF (e.g. ellis):
+
+    ansible-playbook scale-out-playbook.yml --extra-vars "@cloud.yml" --extra-vars "vnf=Clearwater cluster=ellis"
+
+Scale-In:
+---------
+
+Scale-in a cluster node of a VNF (e.g. node 0 of ellis):
+
+    ansible-playbook scale-in-playbook.yml --extra-vars "@cloud.yml" --extra-vars "vnf=Clearwater cluster=ellis node=0"
 
 Cleanup
 ----------
 
 Destroy the virtual resources of an existing tenant (tenant and administrator will remain):
 
-    ansible-playbook cleanup-playbook.yml  --vault-id passphrase.txt --extra-vars "vnf=Clearwater"
+    ansible-playbook cleanup-playbook.yml --extra-vars "@cloud.yml" --extra-vars "vnf=Clearwater"
