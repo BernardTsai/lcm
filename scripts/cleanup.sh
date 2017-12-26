@@ -48,7 +48,7 @@ fi
 
 echo Checking API access
 
-openstack user show $OS_USERNAME 
+openstack user show $OS_USERNAME > /dev/null
 
 if [ "$?" != "0" ]; then
   echo "Unable to access the API endpoint"
