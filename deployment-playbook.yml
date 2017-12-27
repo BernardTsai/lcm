@@ -90,15 +90,15 @@
 
   - name: Create Key
     shell:
-      cmd: ssh-keygen -b 2048 -t rsa -N "" -q -f /tmp/{{ vnfd.tenant.name }}.key
-      creates: /tmp/{{ vnfd.tenant.name }}.key
+      cmd: ssh-keygen -b 2048 -t rsa -N "" -q -f /tmp/{{vnfd.tenant.name}}.key
+      creates: /tmp/{{vnfd.tenant.name}}.key
 
   - name: Add Key to Administrator Account
     os_keypair:
-      cloud:           "{{ vnfd.vnf.name }}_{{ vnfd.tenant.name }}"
-      name:            "{{ vnfd.vnf.name }}_{{ vnfd.tenant.name }}_keypair"
-      public_key_file: /tmp/{{ vnfd.tenant.name }}.key.pub
-      state:           present
+      cloud:      "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}"
+      name:       "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_keypair"
+      public_key: "{{vnfd.tenant.public_key}}
+      state:      present
     environment:
       OS_CLIENT_CONFIG_FILE: "/tmp/{{uuid}}.yml"
 
