@@ -97,7 +97,7 @@
     os_keypair:
       cloud:      "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}"
       name:       "{{vnfd.vnf.name}}_{{vnfd.tenant.name}}_keypair"
-      public_key: "{{vnfd.tenant.public_key}}
+      public_key: "{{vnfd.tenant.public_key}}"
       state:      present
     environment:
       OS_CLIENT_CONFIG_FILE: "/tmp/{{uuid}}.yml"
